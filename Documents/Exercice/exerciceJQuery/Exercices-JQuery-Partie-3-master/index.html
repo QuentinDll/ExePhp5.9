@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Exercice 5</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <input type="text" name="text" value=""></input>
+  <div id="rect"></div>
+</body>
+<script>
+$('#rect').css('width', '200px').css('height', '200px').css('background-color', '#6b00b3').css('left', '0px').css('top', '0px').css('position' , 'fixed').css('box-shadow',' 1px 1px black', '0.5em 0 0.7em black', '-0.5em 0 0.7em black');
+$('input').keydown(function(e) {
+  var margin;
+  var maxBorder;
+  var move;
+  //Assignation des variables en fonction de la touche entrée
+  switch (e.which) {
+    // left movement
+    case 37:
+    margin = - 10;
+    maxBorder = $(document).width();
+    move = 'left';
+    break;
+    // up movement
+    case 39:
+    margin = 10;
+    maxBorder = $(document).width();
+    move = 'left';
+    break;
+    // bot movement
+    case 38:
+    margin = - 10;
+    maxBorder = $(document).height();
+    move = 'top';
+    break;
+    // right movement
+    case 40:
+    margin = 10;
+    maxBorder = $(document).height();
+    move = 'top';
+    break;
+  }
+  //nouvelle position
+  var newPosition = parseInt($('#rect').css(move)) + margin;
+  maxBorder = parseInt(maxBorder);
+  //condition de verifiation de bord de page
+  if(margin > 0){
+    newPosition = (newPosition + 50 > maxBorder)? 0 : newPosition;
+  } else {
+    newPosition = (newPosition -100 < -100)? maxBorder - 50 : newPosition;
+  }
+  //nouvelle position si bord de page
+  $('#rect').css(move, newPosition + 'px');
+});
+</script>
+</html>
